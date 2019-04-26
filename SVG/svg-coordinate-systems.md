@@ -48,14 +48,17 @@ SVG элементы не регламентированы моделью CSS Bo
 
 ### Исходная система координат
 
+Исходная система координат `viewport` - это система координат созданная на `viewport` с началом в левом верхнем углу в точке `(0,0)`, позитивное направление оси X - вправо, позитивное направление оси Y - вниз, и одно деление в исходной системе координат равно одному `px` `viewport`. Эта система координат похожа на систему координат для HTML элементов в соответствие с блочной моделью CSS.
 
-The initial viewport coordinate system is a coordinate system established on the viewport, with the origin at the top left corner of the viewport at point (0, 0), the positive x-axis pointing towards the right, the positive y-axis pointing down, and one unit in the initial coordinate system equals one “pixel” in the viewport. This coordinate system is similar to the coordinate system established on an HTML element with a CSS box model.
+Пользовательская исходная система координат - это система координат созданная на основе оболочки SVG. Эта система координат изначально идентична системе координат `viewport` с началом в левом верхнем углу в точке `(0,0)`, позитивное направление оси X - вправо, позитивное направление оси Y - вниз. Используя аттрибут `viewBox` исходная пользовательская система координат - также известная как выбранная система координат или используемая пользовательская область - может быть изменена таким образом, что она больше не будет идентична системе координат `viewport`. Мы поговорим об этом подробнее в следующей главе. 
 
-The initial user coordinate system is the coordinate system established on the SVG canvas. This coordinate system is initially identical to the viewport coordinate system—it has its origin at the top left corner of the viewport with the positive x-axis pointing towards the right, the positive y-axis pointing down. Using the viewBox attribute, the initial user coordinate system—also known as the current coordinate system, or user space in use—can be modified so that it is not identical to the viewport coordinate system anymore. We’ll talk about modifying it in the next section.
+На данный момент мы не будем использовать аттрибут `viewBox`. Пользовательская система координат будет идентична системе координат `viewport`.
 
-For now, we won’t specify a viewBox attribute value. The user coordinate system of the SVG canvas is identical to that of the viewport.
 
 In the following image, the viewport coordinate system “ruler” is grey, and that of the user coordinate system (the viewBox) is blue. Since they are both identical at this point, the two coordinate systems overlap.
+
+![initial-coordinate-systems](https://d33wubrfki0l68.cloudfront.net/fedcd70d34fc3a5dea2369e727b6a8e7081de43b/3496e/images/initial-coordinate-systems.jpg)
+
 Viewport Coordinate System
 The initial coordinate systems established on the viewport and SVG canvas. Grey units represent the viewport coordinate system; blue units represent the user coordinate system. Both coordinate systems are identical and coincide.
 
