@@ -7,7 +7,9 @@ SVG элементы не регламентированы моделью CSS Bo
 
 
 [Разбираемся с системой координат и трансформациями SVG. Часть 1 `viewport` , `viewBox`, `preserveAspectRatio`](https://www.sarasoueidan.com/blog/svg-coordinate-systems/)
+
 [Разбираемся с системой координат и трансформациями SVG. Часть 2 – Аттрибут `transform`](http://sarasoueidan.com/blog/svg-transformations)
+
 [Разбираемся с системой координат и трансформациями SVG. Часть 3 – Определяем новый `viewport`](http://sarasoueidan.com/blog/nesting-svgs)
    
 Для визуализации основных принципов и объяснений в статье далее, автором было создано интерактивное демо, позволящее поиграться со значениями аттрибутов `viewBox` и `preserveAspectRatio`.
