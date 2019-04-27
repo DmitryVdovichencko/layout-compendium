@@ -69,27 +69,30 @@ SVG элементы не регламентированы моделью CSS Bo
 В прошлый раз, пользовательская система координат была идентична системе координат `viewport`. Дело в том, что мы просто не определили ее по другому. Вот почему все расположение и отрисовка выполнены относительно системы координат `viewport`.
 Как только мы создали систему координат `viewport` (назначив `width` и` height`) , браузер создал стандартную пользовательскую систему координат идентичную `viewport`.
 
+Вы определяете вашу собственную пользовательскую систему координат используя аттрибут `viewBox`. Если пользовательская система координат, которую вы выбрали, имеет то же соотношение сторон (отношение высоты к ширине) как система координат `viewport`, то пользовательская система координат заполнит всю область `viewport` (поговорим о примерах через минуту). В любом случае, если ваша пользовательская система координат определена с другим соотношением сторон, вы можете использовать аттрибут `preserveAspectRatio`, чтобы определить будет ли вся графика отображаться внутри `viewport` и также вы можете использовать его для позиционирования графики внутри `viewport`. Мы рассмотрим все в деталях и примерах для таких случаев в сдедующей главе. А пока мы посмотрим на те примеры, где соотношение сторон `viewBox` совпадает с `viewport`  - в этих примерах `preserveAspectRatio` не будет оказывать никакого влияния.
 
+Но прежде чем перейдем к примерам, посмотрим на синтаксис `viewBox`.
 
-You specify your own user coordinate system using the viewBox attribute. If the user coordinate system you choose has the same aspect ratio (ratio of height to width) as the viewport coordinate system, it will stretch to fill the viewport area (we’ll talk examples in a minute). However, if your user coordinate system does not have the same aspect ratio, you can use the preserveAspectRatio attribute to specify whether or not the entire system will be visible inside the viewport or not, and you can also use it to specify how it is positioned inside the viewport. We’ll get into details and lots of examples for this case in the next section. In this section, we’ll stick to examples where the aspect ratio of the viewBox matches that of the viewport—in these examples, preserveAspectRatio has no effect.
+### Синтаксис `viewBox`
 
-Before we get into the examples, we’ll go over the syntax of viewBox.
-The viewBox syntax
-
-The viewBox attribute takes four parameters as a value: <min-x>, <min-y>, width and height.
-?
+Аттрибут `viewBox` принимает четыре параметра: `<min-x>`, `<min-y>`, `width` и`height`.
+```html
 viewBox = <min-x> <min-y> <width> <height>
+```
 
-The <min-x> and <min-y> values determine the upper left corner of the viewbox, and the width and height determine the width and height of that viewBox. Note here that the width and height of the viewBox need not be the same as the width and height set on the parent <svg> element. A negative value for <width> or <height> is invalid. A value of zero disables rendering of the element.
+Значения `<min-x>` и `<min-y>` определяют левый верхний угол `viewBox`, а  `width` и `height` - ширину и высоту `viewBox`.
 
-Note that the width of the viewport can also be set in CSS to any value. For example, setting width: 100% will make the SVG viewport fluid in a document. Whatever value of the viewBox, it will then be mapped to the computed width of the outer SVG element.
+Заметьте, здесь ширина и высота не обязательно должны быть такими же как и в родительском `<svg>` элементе. Негативные значения ширины и высоты являются некорректными. Нулевые значения отменяют рендеринг элемента.
 
-An example of setting viewBox would look like the following:
-?
-<!-- The viewbox in this example is equal to the viewport, but it can be different -->
+И также, можно заметить, что ширине `viewport` может быть назначено любое значение с помощью CSS. Например, если установить ширину 100% SVG заполнит документ. Каким бы ни было значение `viewBox`, оно будет вписано в вычисленную ширину наружного SVG.  
+
+Так выглядит пример настройки `viewBox`:
+```html
+<!-- viewbox в этом примере равен viewport, но они могут быть различными -->
 <svg width="800" height="600" viewbox="0 0 800 600">
-    <!-- SVG content drawn onto the SVG canvas -->
+    <!-- SVG содержимое отрисованное в оболочке SVG  -->
 </svg>
+```
 
 If you’ve read about the viewBox somewhere before, you may have come across a few definitions saying that you can use the viewBox attribute to transform the SVG graphic by scaling or translating it. This is true. I’m going to go further and say that you can even crop the SVG graphic using viewBox.
 
