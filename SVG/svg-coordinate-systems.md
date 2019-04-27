@@ -1,7 +1,7 @@
 # Разбираемся с системой координат и трансформациями SVG. Часть 1 `viewport` , `viewBox`, `preserveAspectRatio`.
 Оригинал: [Sara Soueidan "Understanding SVG Coordinate Systems and Transformations"](https://www.sarasoueidan.com/blog/svg-coordinate-systems/)
 
-SVG элементы не регламентированы моделью CSS Box как элементы HTML. Это делает позиционирование и трансформацию этих элементов довольно непростыми и, как может показаться на первый взгляд, менее интуитивными. В любом случае, однажды разобравшись с тем, как работают система координат и трансформации SVG, манипуляции с SVG графикой станут намного легче и обретут больше смысла. В этой статье мы разберем три самых важных аттрибута SVG котрые оказывают влияние на систему координат: `viewport` , `viewBox`, `preserveAspectRatio`.
+SVG элементы не регламентированы моделью CSS Box как элементы HTML. Это делает позиционирование и трансформацию этих элементов довольно непростыми и, как может показаться на первый взгляд, менее интуитивными. В любом случае, однажды разобравшись с тем, как работают система координат и трансформации SVG, манипуляции с SVG графикой станут намного легче и обретут больше смысла. В этой статье мы разберем три самых важных аттрибута SVG которые оказывают влияние на систему координат: `viewport` , `viewBox`, `preserveAspectRatio`.
 
 Это первая часть серии из трех статей о системе координат и трансформациях в SVG.
 
@@ -58,17 +58,18 @@ SVG элементы не регламентированы моделью CSS Bo
 
 ![initial-coordinate-systems](https://d33wubrfki0l68.cloudfront.net/fedcd70d34fc3a5dea2369e727b6a8e7081de43b/3496e/images/initial-coordinate-systems.jpg)
 
-Viewport Coordinate System
-The initial coordinate systems established on the viewport and SVG canvas. Grey units represent the viewport coordinate system; blue units represent the user coordinate system. Both coordinate systems are identical and coincide.
+Попугай на этом SVG имеет рамку размером 200 единиц (200px в данном случае) в ширину и 300 единиц в высоту. Попугай отрисован в рамке на основе исходной системы координат
 
-The parrot in the above SVG has a bounding box that is 200 units (200 pixels in this case) in width and 300 units in height. The parrot is drawn on the canvas based on the initial coordinate system.
+Новое пользовательское пространство (т.е. новая выбранная система координат) может быть получено с помощью определения трасформаций через аттрибут `transform` для элемента контейнера или графического элемента. Мы поговорим о трансформациях во второй части этой статьи и более детально в третьей последней части.
 
-A new user space (i.e., a new current coordinate system) can also be established by specifying transformations using the transform attribute on a container element or graphics element. We'll talk about transformations in the second part of this article, and then in more details in the third and last part.
-The viewBox
+### `viewBox`
 
-I like to think of the viewBox as the “real” coordinate system. After all, it is the coordinate system used to draw the SVG graphics onto the canvas. This coordinate system can be smaller or bigger than the viewport, and it can be fully or partially visible inside the viewport too.
+Мне нравится думать о `viewBox` как о __"реальной"__  системе координат. В конце концов, именно эта система координат используется для отрисовки графики SVG в оболочке. Эта система координат может быть меньше или больше чем `viewport`, и также может частично или полностью отображаться в окне просмотра.
 
-In the previous section, this coordinate system—the user coordinate system—was identical to the viewport coordinate system. The reason for that is that we did not specify it to be otherwise. That’s why all the positioning and drawing seemed to be done relative to the viewport coordinate system. Because once we created a viewport coordinate system (using width and height), the browser created a default user coordinate system that is identical to it.
+В прошлый раз, пользовательская система координат была идентична системе координат `viewport`. Дело в том, что мы просто не определили ее по другому. Вот почему все расположение и отрисовка выполнены относительно системы координат `viewport`.
+Как только мы создали систему координат `viewport` (назначив `width` и` height`) , браузер создал стандартную пользовательскую систему координат идентичную `viewport`.
+
+
 
 You specify your own user coordinate system using the viewBox attribute. If the user coordinate system you choose has the same aspect ratio (ratio of height to width) as the viewport coordinate system, it will stretch to fill the viewport area (we’ll talk examples in a minute). However, if your user coordinate system does not have the same aspect ratio, you can use the preserveAspectRatio attribute to specify whether or not the entire system will be visible inside the viewport or not, and you can also use it to specify how it is positioned inside the viewport. We’ll get into details and lots of examples for this case in the next section. In this section, we’ll stick to examples where the aspect ratio of the viewBox matches that of the viewport—in these examples, preserveAspectRatio has no effect.
 
