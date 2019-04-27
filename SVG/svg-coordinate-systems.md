@@ -54,8 +54,7 @@ SVG элементы не регламентированы моделью CSS Bo
 
 На данный момент мы не будем использовать аттрибут `viewBox`. Пользовательская система координат будет идентична системе координат `viewport`.
 
-
-In the following image, the viewport coordinate system “ruler” is grey, and that of the user coordinate system (the viewBox) is blue. Since they are both identical at this point, the two coordinate systems overlap.
+На следующем изображении, “оси” системы координат `viewport` - серые, а те оси что относятся к пользоватльской системе координат  `viewBox` - голубые. Поскольку обе системы координат на данный момент идентичны, они наложны друг на друга.
 
 ![initial-coordinate-systems](https://d33wubrfki0l68.cloudfront.net/fedcd70d34fc3a5dea2369e727b6a8e7081de43b/3496e/images/initial-coordinate-systems.jpg)
 
