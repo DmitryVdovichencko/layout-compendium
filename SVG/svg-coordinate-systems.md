@@ -94,23 +94,26 @@ viewBox = <min-x> <min-y> <width> <height>
 </svg>
 ```
 
-If you’ve read about the viewBox somewhere before, you may have come across a few definitions saying that you can use the viewBox attribute to transform the SVG graphic by scaling or translating it. This is true. I’m going to go further and say that you can even crop the SVG graphic using viewBox.
+Если вы читали о `viewBox` где-нибудь ранее, возможно вы  столкнулись с несколькими определениями, которые говорили о том, что вы можете использовать `viewBox` для преобразования графики SVG, масштабируя или перемещая ее. Это верно. Я собираюсь зайти дальше и сказать, что  с помощью `viewBox` вы можете даже обрезать SVG.
 
-The best way to understand the viewBox and differentiate it from the viewport is by visualizing it. So let’s start with some examples. We’ll start with examples where the aspect ratio of the viewbox is the same as the aspect ratio of the viewport, so we won’t need to dig into preserveAspectRatio yet.
-viewBox with aspect ratio equal to the viewport's aspect ratio
+Лучший способ понять как работает `viewBox` и чем он отличается от `viewport` - визуализировать их. Так что давайте начнем с нескольких примеров. Сначала посмотрим примеры с одинаковым соотношением сторон `viewBox` и`viewport` , в этом случае, нам пока не нужно будет разбираться с тем, как работает `preserveAspectRatio`.
 
-We’ll start with a simple example. The viewbox in this example will be half the size of the viewport. We won’t change the origin of the viewbox in this one, so both <min-x> and <min-y> will be set to zero. The width and height of the viewbox will be half the width and height of the viewport. This means that we’re preserving the aspect ratio.
-?
+Вот простой пример. `viewBox` в этом примере будет в два раза меньше чем `viewport`. Мы не изменяли начало координат `viewBox` в данном случае, так что обе оси начинаются от нулевой точки. Ширина и высота `viewBox` будут составлять половину ширины и высоты 
+`viewport`. Это означает, что мы сохранили соотношение сторон. 
+
+```html
 <svg width="800" height="600" viewbox="0 0 400 300">
-    <!-- SVG content drawn onto the SVG canvas -->
+    <!-- SVG содержимое отрисованное в оболочке SVG  -->
 </svg>
+```
 
-So, what does viewbox="0 0 400 300" exactly do?
+Что именно делает `viewbox="0 0 400 300"`?
 
-    It specifies a specific region of the canvas spanning from a top left point at (0, 0) to a point at (400, 300).
-    The SVG graphic is then cropped to that region.
-    The region is scaled up (in a zoom-in-like effect) to fill the entire viewport.
-    The user coordinate system is mapped to the viewport coordinate system so that—in this case—one user unit is equal to two viewport units.
+- [x] Определяет специальную область от левого верхнего края в точке (0, 0) до точки (400, 300)
+- [x] SVG графика обрезается до этой области
+- [x] Область масштабируется (увеличивается) для заполнения всего `viewport`
+- [x] Пользовательская система координат приводится к системе координат `viewport` так что в данном случае одно деление пользовательской системы координат будет равно двум делениям `viewport`
+
 
 The following image shows the result of applying the above viewbox to the <svg> canvas in our example. The grey units represent the viewport coordinate system, and the blue coordinate system represents the user coordinate system established by the viewBox.
 Specifying a viewbox has a result similar to cropping the graphic to that viewbox and then zooming it in so that it fills the entire viewport area. Remember that we're still maintaining the same aspect ratio as the viewport in this case.
