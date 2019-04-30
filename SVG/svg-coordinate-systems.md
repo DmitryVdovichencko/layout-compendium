@@ -132,24 +132,34 @@ viewBox = <min-x> <min-y> <width> <height>
 
 Эффект применения `viewBox="100 100 200 15` такой же как и в предыдущем примере - обрезка изображения. Графика обрезана и отмасштабирована для заполнения `viewport` 
 
-The effect of applying viewBox="100 100 200 150" is also a crop effect like the one in the previous example. The graphic is cropped and scaled up to fill the entire viewport area.
-The result of "cropping" the graphic to a viewbox with an origin at (100, 100) and width 200 and height 150.
+![viewbox-crop translate](https://d33wubrfki0l68.cloudfront.net/a31c4b3156fec4d20bc555d3ec4d9f7ca6c291fb/832dc/images/viewbox-400-300-crop-translate.jpg)
 
-Again, the user coordinate system is mapped to the viewport coordinate system—200 user units are mapped to 800 viewport units so that every user unit is equal to four viewport units. This results in a zoom-in effect like the one you can see in the above screenshot.
+Еще раз, пользовательская система координат вписана в систему координат `viewport` - 200 пользовательских единиц соответствуют 800 единицам `viewport`, т.о. каждая пользовательская единица  равна 4 единицам `viewport` . В результате получается такой зум - эффект как на скриншоте выше. 
 
-Also note, at this point, that specifying non-zero values for the <min-x> and <min-y> values has a transformation effect on the graphic; more specifically, it is as though the SVG canvas was translated by 100 units to the top and 100 units to the left (transform="translate(-100 -100)").
+Также заметим, что в этом случае, определив ненулевые значения для `<min-x>` и `<min-y>` мы создаем эффект трансформации графики;более специфическим способом чем перенос оболочки SVG с помощью `transform="translate(-100 -100)"`  
 
-Indeed, as the specification states, "the effect of the viewBox attribute is that the user agent automatically supplies the appropriate transformation matrix to map the specified rectangle in user space to the bounds of a designated region (often, the viewport)".
+Действительно, как говорит спецификация:
 
-This is just a fancy way of saying what we already mentioned before: the graphic is cropped and then scaled to fit into the viewport. The spec then goes on to add a note: "in some cases the user agent will need to supply a translate transformation in addition to a scale transformation. For example, on an outermost svg element, a translate transformation will be needed if the viewBox attributes specifies values other than zero for <min-x> or <min-y>.)"
+> Эффект применения `viewBox` в том, что со стороны пользователя автоматически поддерживается соответствующая матрица трансформаций чтобы вписать определенную область пользовательского пространства в границы области назначения (часто `viewport`).
 
-To demonstrate the translation transformation even better, let’s try applying negative values (-100) to <min-x> and <min-y>. The translation effect would be then similar to transform="translate(100 100)"; meaning that the graphic will be translated to the bottom and to the right after being cropped and scaled. If were to revisit the second to last example with a crop size of 400 by 300, and then add the new negative <min-x> and <min-y> values, this would be our new code:
-?
+Это просто более сложный способ сказать о том, что мы отмечали ранее: графика обрезается и масштабируется до заполнения `viewport`. Затем в спецификации добавлено примечание:
+
+> В некоторых случаях на стороне пользователя необходима поддержка трансформации переноса в дополнение к масштабированию. Например, на внешнем SVG элементе, трансформация переноса понадобится если для `viewBox` определены ненулевые значения для `<min-x>` или `<min-y>`.
+
+Чтобы лучше продемонстрировать трансформацию переноса, давайте применим отрицательное значение (-100) для `<min-x>` и `<min-y>`.
+Эффект переноса будет такой же как при применении `transform="translate(100 100)"`; это означает, что графика будет перенесена вниз и вправо после обрезки и масштабирования. Так будет выглядеть код предыдущего примера с отрицательными значениями для `<min-x>` и `<min-y>`
+
+```html
 <svg width="800" height="600" viewbox="-100 -100 400 300">
     <!-- SVG content drawn onto the SVG canvas -->
 </svg>
+```
 
-The result of applying the above viewBox transformation to the graphic is shown in the following image:
+Результат применения примера выше будет выглядеть следующим образом:
+
+![viewbox-crop-translate](https://d33wubrfki0l68.cloudfront.net/a31c4b3156fec4d20bc555d3ec4d9f7ca6c291fb/832dc/images/viewbox-400-300-crop-translate.jpg)
+
+Заметим, что в отличие от применения аттрибута `transform`, автоматическая трансформация выполненная с применением `viewBox` не влияет на `x` и `y`, и ширину и высоту элемента с аттрибутом `viewBox`. Таким образом в примере выше
 
 Note that, unlike the transform attribute, the automatic transformation that is created due to a viewBox does not affect the x, y, width and height attributes on the element with the viewBox attribute. Thus, in the example above which shows an svg element which has attributes width, height and viewBox, the width and height attributes represent values in the coordinate system that exists before the viewBox transformation is applied. You can see this in the above examples as the initial (grey) viewport coordinate system remains unaffected even after using the viewBox attribute on the <svg>.
 
