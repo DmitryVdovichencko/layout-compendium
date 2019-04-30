@@ -114,19 +114,23 @@ viewBox = <min-x> <min-y> <width> <height>
 - [x] Область масштабируется (увеличивается) для заполнения всего `viewport`
 - [x] Пользовательская система координат приводится к системе координат `viewport` так что в данном случае одно деление пользовательской системы координат будет равно двум делениям `viewport`
 
+Следующее изображение показывает результат применения `viewbox` к оболочке `<svg>` в нашем примере. Серые деления представляют систему координат `viewport`, голубые - пользовательскую систему координат созданную с помощью `viewbox`. Назначая `viewbox` можно получить результат похожий на обрезку графики по `viewbox` и масштабирования ее до заполнения всей области `viewport`. И помним, что мы, пока что, сохраняем то же соотношение сторон, что и у `viewport`. 
 
-The following image shows the result of applying the above viewbox to the <svg> canvas in our example. The grey units represent the viewport coordinate system, and the blue coordinate system represents the user coordinate system established by the viewBox.
-Specifying a viewbox has a result similar to cropping the graphic to that viewbox and then zooming it in so that it fills the entire viewport area. Remember that we're still maintaining the same aspect ratio as the viewport in this case.
+![viewbox-crop](https://d33wubrfki0l68.cloudfront.net/e6639267b77782b0d62ce5f29a4d9b07bf5df87a/14c69/images/viewbox-400-300-crop.jpg)
 
-Anything you draw on the SVG canvas will be drawn relative to the new user coordinate system.
+Все что вы можете нарисовать в оболочке SVG будет отрисовано относительно новой пользовательской системы координат.
 
-I like to visualize the SVG canvas with a viewBox the same way as Google maps. You can zoom in to a specific region or area in Google maps; that area will be the only area visible, scaled up, inside the viewport of the browser. However, you know that the rest of the map is still there, but it's not visible because it extends beyond the boundaries of the viewport—it's being clipped out.
+Мне нравится представлять оболочку SVG с `viewBox` как Google Maps. Вы можете увеличить определенную область или регион в картах Google; только эта область будет отображена и увеличена до заполнеия всего `viewport` браузера. Тем не менее, вы знаете что остальная часть карты все еще здесь, просто она не отображается т.к. выходит за границы `viewport` - и значит эта оставшаяся часть будет отсечена.
 
-Now let’s try changing the <min-x> and <min-y> values. We’ll set both to 100. They can be any number you want. The width and height ratio will also be the same as width and height ratio of the viewport.
-?
+Теперь давайте попробуем изменить значения `<min-x>` и `<min-y>`. Назначим обоим аттрибутам значение 100. Можно выбрать любое число, какое вы захотите. Соотношение сторон выберем таким же, как у `viewport` 
+
+```html
 <svg width="800" height="600" viewbox="100 100 200 150">
     <!-- SVG content drawn onto the SVG canvas -->
 </svg>
+```
+
+Эффект применения `viewBox="100 100 200 15` такой же как и в предыдущем примере - обрезка изображения. Графика обрезана и отмасштабирована для заполнения `viewport` 
 
 The effect of applying viewBox="100 100 200 150" is also a crop effect like the one in the previous example. The graphic is cropped and scaled up to fill the entire viewport area.
 The result of "cropping" the graphic to a viewbox with an origin at (100, 100) and width 200 and height 150.
