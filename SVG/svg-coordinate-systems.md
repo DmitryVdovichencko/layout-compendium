@@ -132,7 +132,7 @@ viewBox = <min-x> <min-y> <width> <height>
 
 Эффект применения `viewBox="100 100 200 15` такой же как и в предыдущем примере - обрезка изображения. Графика обрезана и отмасштабирована для заполнения `viewport` 
 
-![viewbox-crop translate](https://d33wubrfki0l68.cloudfront.net/a31c4b3156fec4d20bc555d3ec4d9f7ca6c291fb/832dc/images/viewbox-400-300-crop-translate.jpg)
+![viewbox-crop translate](https://d33wubrfki0l68.cloudfront.net/59a2fdb34e4735b8cdb865efe7233ac373b5fc43/d5d7d/images/viewbox-200-150-crop.jpg)
 
 Еще раз, пользовательская система координат вписана в систему координат `viewport` - 200 пользовательских единиц соответствуют 800 единицам `viewport`, т.о. каждая пользовательская единица  равна 4 единицам `viewport` . В результате получается такой зум - эффект как на скриншоте выше. 
 
