@@ -159,27 +159,34 @@ viewBox = <min-x> <min-y> <width> <height>
 
 ![viewbox-crop-translate](https://d33wubrfki0l68.cloudfront.net/a31c4b3156fec4d20bc555d3ec4d9f7ca6c291fb/832dc/images/viewbox-400-300-crop-translate.jpg)
 
-Заметим, что в отличие от применения аттрибута `transform`, автоматическая трансформация выполненная с применением `viewBox` не влияет на `x` и `y`, и ширину и высоту элемента с аттрибутом `viewBox`. Таким образом в примере выше
+Заметим, что в отличие от применения аттрибута `transform`, автоматическая трансформация выполненная с применением `viewBox` не влияет на `x` и `y`, и ширину и высоту элемента с аттрибутом `viewBox`. Таким образом в примере выше, в котором показано что `svg` элемент имеющий аттрибуты `width`, `height` и `viewBox`, ширина и высота представлены элемента в системе координат, которая была до применения трансформации `viewBox`. Вы можете увидеть это в примерах выше, поскольку так же как и исходная ( серая ),
+система координат `viewport` осталась неизменной после использования аттрибута `viewBox` на `svg`.
 
-Note that, unlike the transform attribute, the automatic transformation that is created due to a viewBox does not affect the x, y, width and height attributes on the element with the viewBox attribute. Thus, in the example above which shows an svg element which has attributes width, height and viewBox, the width and height attributes represent values in the coordinate system that exists before the viewBox transformation is applied. You can see this in the above examples as the initial (grey) viewport coordinate system remains unaffected even after using the viewBox attribute on the <svg>.
+С другой стороны, как и свойство `transform`, это создает новую систему коррдинат для всех других аттрибутов и для элементов-потомков.
+Как видно в примерах, как только пользовательская система координат создана - она уже не будет идентична системе координат `viewport`, как исходная система координат до использования `viewBox`. И все потомки `svg` будут позиционироваться и масштабироваться в новой пользовательской системе координат, а не в той, что была исходной.
 
-On the other hand, like the transform attribute, it does establish a new coordinate system for all other attributes and for descendant elements. You can also see that in the above examples as the user coordinate system established is a new one—it does not remain as the initial user coordinate system which was identical to the viewport coordinate system before the viewBox was used. And any descendants of the <svg> will be positioned and sized in the new user coordinate system, not the initial one.
+Наш последний пример `viewBox` похож на предыдущий, но вместо обрезки оболочки мы собираемся расширить ее внутри `viewport` и посмотреть как это повлияет на графику. Мы определим `viewBox` с выстой и шириной больше чем у `viewport`, тем не менее соблюдая соотношение сторон `viewport`, мы разберемся с разными соотношениями сторон в следующей главе.
 
-Our last viewBox example is similar to the previous ones, but instead of cropping the canvas, we’re going to extend it inside the viewport and see how it affects the graphic. We’re going to specify a viewbox with a width and height that are larger than those of the viewport, while also maintaining the aspect ratio of the viewport. We’ll deal with different aspect ratios in the next section.
+В этом примере, мы создадим `viewBox` в 1.5 раза превышающий `viewport`
 
-In this example, we’ll make the viewbox 1.5 times the size of the viewport.
-?
+```html
 <svg width="800" height="600" viewbox="0 0 1200 900">
     <!-- SVG content drawn onto the SVG canvas -->
 </svg>
+```
+
 
 What will happen now is that the user coordinate system is going to be scaled up to 1200x900. It will then be mapped to the viewport coordinate system so that every 1 unit in the user coordinate system is equal to viewport-width / viewBox-width horizontally, and viewport-height / viewBox-height units vertically in the viewport coordinate system. This means that, in this case, every one x-unit in the user coordinate system is equal to 0.66 x-units in the viewport coordinate system, and every one user y-unit is mapped to 0.66 viewport y-units.
 
 Of course, the best way to understand this is to visualize the result. The viewbox is scaled so that it fits inside the viewport as shown in the following image. And because the graphic is drawn on the canvas based on the new user coordinate system, not the viewport coordinate system, it will look smaller inside the viewport.
 A 1200x900 user coordinate system mapped into the 800x600 viewport coordinate system. The grey units represent the viewport coordinate system; the blue units represent the system established from the viewBox.
 
+![viewBox scaled 1.5](https://d33wubrfki0l68.cloudfront.net/423b1dae8696c091dc8f999c0f1c99a419302c48/2df7b/images/viewbox-1200-900.jpg)
+
 So far, all of our examples have been in conformity with the viewport’s height to width aspect ratio. But what happens if the height and width specified in the viewBox have a different aspect ratio than that of the viewport’s? For example, suppose we set the dimensions of the viewbox to be 1000x500. The aspect ratio of height to width is no longer the same as that of the viewport. The result of using viewBox = "0 0 1000 500" in our example looks like the following:
 The result of defining a 1000x500 user coordinate system in a 800x600 viewport.
+
+![viebox 1000 x 500](https://d33wubrfki0l68.cloudfront.net/b78870133c46cf41fda5933597744438eaa730f7/573e9/images/viewbox-1000-500.jpg)
 
 The user coordinate system and hence the graphic is positioned inside the viewport so that:
 
