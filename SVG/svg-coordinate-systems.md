@@ -175,8 +175,8 @@ viewBox = <min-x> <min-y> <width> <height>
 </svg>
 ```
 
+Что случится теперь, когда пользовательская система координат должна будет масштабироваться до размеров 1200х900? Пользовательская система координат будет вписана в систему координат `viewport` таким образом, что каждая единица пользовательской системы координат будет равно отношению `vieport-width/vieBox-width` по ширине и `vieport-height/vieBox-height` по высоте в системе координат `viewport`. Это означает, что в нашем случае, каждая единица по оси `x` в пользовательской системе координат будет равна `0.66` по оси `x` `viewport` и каждая пользовательская единица по оси `y` будет равна `0.66` по оси `y` `viewport`
 
-What will happen now is that the user coordinate system is going to be scaled up to 1200x900. It will then be mapped to the viewport coordinate system so that every 1 unit in the user coordinate system is equal to viewport-width / viewBox-width horizontally, and viewport-height / viewBox-height units vertically in the viewport coordinate system. This means that, in this case, every one x-unit in the user coordinate system is equal to 0.66 x-units in the viewport coordinate system, and every one user y-unit is mapped to 0.66 viewport y-units.
 
 Of course, the best way to understand this is to visualize the result. The viewbox is scaled so that it fits inside the viewport as shown in the following image. And because the graphic is drawn on the canvas based on the new user coordinate system, not the viewport coordinate system, it will look smaller inside the viewport.
 A 1200x900 user coordinate system mapped into the 800x600 viewport coordinate system. The grey units represent the viewport coordinate system; the blue units represent the system established from the viewBox.
