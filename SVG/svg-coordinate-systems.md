@@ -195,15 +195,20 @@ The user coordinate system and hence the graphic is positioned inside the viewpo
 
 Это стандартное поведение. Что может на него повлиять? И что если нам понадобится изменить позицию `viewBox` внутри `viewport`. И  тут в дело вступает аттрибут `preserveAspectRatio`
 
-### The preserveAspectRatio Attribute
+### Аттрибут `preserveAspectRatio` 
 
-The preserveAspectRatio attribute is used to force a uniform scaling for the purposes of preserving the aspect ratio of a graphic.
+Аттрибут `preserveAspectRatio` используется для принудительного единого масштабирования чтобы сохранить предпочтительное соотношение сторон для графики. 
 
-If you define a user coordinate system with an aspect ratio different from that of the viewport’s, and if the browser were to stretch the viewbox to fit into the viewport as we’ve seen in previous examples, the difference in aspect ratios will cause the graphic to be distorted in either direction. So if the viewbox in the last example were to be stretched to fill the viewport in both directions, the graphic would look like so:
-The result of mapping the user coordinate system to the viewport without preserving its aspect ratio. The graphic is distorted and looks shrunk horizontally while also being stretched vertically.
+Если вы определили пользовательскую систему координат с соотношением сторон отличающимся от `viewport`, и если браузер растянул `viewBox` для заполнения `viewport` как мы видели в предыдущих примерах, различие в сотношениях сторон спровоцирует искажение графики в любом направлении. Так что если `viewBox` в последнем примере будет растянут для заполнения `viewport` в обоих направлениях, графика будет выглядеть как то так:
 
-The distortion is also clearly visible (and unwanted, of course) when using a viewbox value of 0 0 200 300, which would be smaller than the dimensions of the viewport. I chose this value in particular so that the viewbox matches the size of the bounding box of the parrot. If the browser were to stretch the graphic to fill the entire viewport, it would look like the so:
-The result of mapping the user coordinate system to the viewport without preserving its aspect ratio. The graphic is distorted.
+![without preserveaspectratio](https://d33wubrfki0l68.cloudfront.net/1429df6a1bd831d42096cea4cbbb409d5b848520/b53cd/images/viewbox-1000-500-stretched.jpg)
+
+Графика выглядит так, будто ее сжали по горизонтали и растянули по вертикали.
+
+Искажение также хорошо будет заметно (что конечно, нежелательно) при использовании `viewBox` со значением ` 0 0 200 300`,  что является меньше чем размеры `viewport`. Мы специально взяли такое значение, чтобы `viewBox` достигал размеров оболочки попугая. Если браузер растянет графику для заполнения `viewport`, это будет выглядеть так:
+
+![without preserveaspectratio](https://d33wubrfki0l68.cloudfront.net/bf423ebd23296696fecedfbb96676d9876966963/b5842/images/viewbox-200-300-stretched.jpg)
+
 
 The preserveAspectRatio attribute allows you to force uniform scaling of the viewbox, while maintaining the aspect ratio, and it allows you to specify how to position the viewbox inside the viewport if you don’t want it to be centered by default.
 The preserveAspectRatio syntax
