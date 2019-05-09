@@ -175,27 +175,27 @@ viewBox = <min-x> <min-y> <width> <height>
 </svg>
 ```
 
-Что случится теперь, когда пользовательская система координат должна будет масштабироваться до размеров 1200х900? Пользовательская система координат будет вписана в систему координат `viewport` таким образом, что каждая единица пользовательской системы координат будет равно отношению `vieport-width/vieBox-width` по ширине и `vieport-height/vieBox-height` по высоте в системе координат `viewport`. Это означает, что в нашем случае, каждая единица по оси `x` в пользовательской системе координат будет равна `0.66` по оси `x` `viewport` и каждая пользовательская единица по оси `y` будет равна `0.66` по оси `y` `viewport`
+Что случится теперь, когда пользовательская система координат должна будет масштабироваться до размеров 1200х900? Пользовательская система координат будет вписана в систему координат `viewport` таким образом, что каждая единица пользовательской системы координат будет равно отношению `vieport-width/vieBox-width` по ширине и `vieport-height/vieBox-height` по высоте в системе координат `viewport`. Это означает, что в нашем случае, каждая единица по оси `x` в пользовательской системе координат будет равна `0.66` по оси `x` `viewport` и каждая пользовательская единица по оси `y` будет равна `0.66` по оси `y` `viewport`.
 
-
-Of course, the best way to understand this is to visualize the result. The viewbox is scaled so that it fits inside the viewport as shown in the following image. And because the graphic is drawn on the canvas based on the new user coordinate system, not the viewport coordinate system, it will look smaller inside the viewport.
-A 1200x900 user coordinate system mapped into the 800x600 viewport coordinate system. The grey units represent the viewport coordinate system; the blue units represent the system established from the viewBox.
+Конечно, лучший способ понять все это - визуализировать результат. `viewBox` масштабируется таким образом чтобы поместиться внутри `viewport` как показано на следующем изображении. И т.к. графика отрисовывается в оболочке основаной на новой пользовательской системе координат, а не системе координат `viewport`, она выглядит меньше внутри `viewport`. Пользовательская система координат 1200x900 вписана в систему координат `viewport` 800x600. Серые деления представляют систему координат `viewport`; голубые - систему координат созданную `viewBox`.
 
 ![viewBox scaled 1.5](https://d33wubrfki0l68.cloudfront.net/423b1dae8696c091dc8f999c0f1c99a419302c48/2df7b/images/viewbox-1200-900.jpg)
 
-So far, all of our examples have been in conformity with the viewport’s height to width aspect ratio. But what happens if the height and width specified in the viewBox have a different aspect ratio than that of the viewport’s? For example, suppose we set the dimensions of the viewbox to be 1000x500. The aspect ratio of height to width is no longer the same as that of the viewport. The result of using viewBox = "0 0 1000 500" in our example looks like the following:
-The result of defining a 1000x500 user coordinate system in a 800x600 viewport.
+До сих пор все наши примеры хорошо уживались с соотношением высоты и ширины `viewport`. Но что будет, если высота и ширина, определенные в аттрибуте `viewBox` имеют другое соотношение сторон, отличающееся от  `viewport`? Например,предположим мы выбрали `viewBox` 1000x500. Соотношение сторон теперь уже не такое как у `viewport`. Результат использования `viewBox = "0 0 1000 500"` для нашего примера будет выглядеть следующим образом:
+
 
 ![viebox 1000 x 500](https://d33wubrfki0l68.cloudfront.net/b78870133c46cf41fda5933597744438eaa730f7/573e9/images/viewbox-1000-500.jpg)
 
+Пользовательская система координат, а значит и графика спозиционируются внутри `viewport` таким образом:
+
 The user coordinate system and hence the graphic is positioned inside the viewport so that:
+- [x] Весь `viewBox` помещается внутри `viewport`
+- [x] В приоритете соотношение сторон `viewBox`. `viewBox` не растянется чтобы закрыть всю область `viewport`
+- [x] `viewBox`будет расположен по центру `viewport`как по вертикали так и по горизонтали
 
-    The entire viewbox fits inside the viewport.
-    The aspect ratio of the viewbox is preserved. The viewbox was not stretched to cover the viewport area.
-    THe viewbox is centered inside the viewport both vertically and horizontally.
+Это стандартное поведение. Что может на него повлиять? И что если нам понадобится изменить позицию `viewBox` внутри `viewport`. И  тут в дело вступает аттрибут `preserveAspectRatio`
 
-This is the default behavior. What controls this behavior? And what if we want to change the position of the viewbox inside the viewport? This is where the preserveAspectRatio attribute comes in.
-The preserveAspectRatio Attribute
+### The preserveAspectRatio Attribute
 
 The preserveAspectRatio attribute is used to force a uniform scaling for the purposes of preserving the aspect ratio of a graphic.
 
