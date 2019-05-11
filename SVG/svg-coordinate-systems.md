@@ -209,32 +209,38 @@ The user coordinate system and hence the graphic is positioned inside the viewpo
 
 ![without preserveaspectratio](https://d33wubrfki0l68.cloudfront.net/bf423ebd23296696fecedfbb96676d9876966963/b5842/images/viewbox-200-300-stretched.jpg)
 
+Аттрибут `preserveAspectRatio` позволяет вам принудительно масштабировать `viewBox`, чтобы сохранить соотношение сторон, и это позволит вам определить как позиционировать `viewBox` внутри `viewport`, если вы не хотите чтобы `viewBox` был отцентрован по умолчанию.
 
-The preserveAspectRatio attribute allows you to force uniform scaling of the viewbox, while maintaining the aspect ratio, and it allows you to specify how to position the viewbox inside the viewport if you don’t want it to be centered by default.
-The preserveAspectRatio syntax
+### Синтаксис `preserveAspectRatio`
 
-The official syntax for preserveAspectRatio is:
-?
+Официальный синтаксис `preserveAspectRatio`:
+
+```html
 preserveAspectRatio = defer? <align> <meetOrSlice>?
+```
+Это применимо для любого элемента, создающего новый `viewport` (мы разберем это в следующей части серии статей)
 
-It is usable on any element that establishes a new viewport (we’ll get into these in the next parts of the series).
+Аргумент `defer` - опциональный и используется только когда вы применяете `preserveAspectRatio` к `<image>`. Он игнорируется при применении на другом элементе. Т.к. применение аттрибутов к `<image>` выходит за рамки нашей статьи, мы пока пропустим аргумент `defer`.
 
-The defer argument is optional, and is used only when you’re applying preserveAspectRatio to an <image>. It is ignored when used on any other element. Since <image> it outside the scope of this article, we’ll skip the defer option for now.
+Параметр `align` определяет нужно ли применять принудительное масштабирование, и, если да, то какое выравнивание применить в случае несовпадения соотношения сторон `viewBox` и `viewport`.
 
-The align parameter indicates whether to force uniform scaling and, if so, the alignment method to use in case the aspect ratio of the viewBox doesn’t match the aspect ratio of the viewport.
+Если параметр `align` установить в `none`, например:
 
-If the align value is set to none, for example:
-?
+```html
 preserveAspectRatio = "none"
+```
 
-The graphic will be scaled to fit inside the viewport without maintaining the aspect ratio, just like we saw in the last two examples.
+Графика будет масштабирована до заполнения `viewport` без поддержания соотношения сторон, как мы видели в последних двух примерах.
 
-All other values of preserveAspectRatio force uniform scaling while preserving the viewbox’s aspect ratio, and specify how to align the viewbox inside the viewport. We’ll get into the values of align shortly.
+Любые другие значения `preserveAspectRatio` включают принудительное масштабирование с поддержанием соотношения сторон `viewBox`, и определяют как выровнять `viewBox` внутри `viewport`. Мы быстренько пробежимся по этим значениям.
 
-The last argument, meetOrSlice is also optional, and it defaults to meet. This argument specifies whether or not the entire viewBox should be visible inside the viewport. If provided, it is separated from the align parameter by one or more spaces. For example:
-?
+Последний аргумент `meetOrSlice` тоже опциональный и имеет значение по умолчанию `meet`. Аргумент определяет, должен ли весь `viewBox` отображаться внутри `viewport`. Если указываем этот аргумент нужно отделить его от аргумента `align` одним или более пробелом. Например: 
+
+```html
 preserveAspectRatio = "xMinYMin slice"
+```
 
+Все эти значения сначала выглядят незнакомыми.
 These values may seem foreign at first. To make understanding them easier and make them more familiar, you can think of the meetOrSlice value as being similar to the background-size values contain and cover; they work pretty much the same. meet is similar to contain, and slice is similar to cover. Here are the definitions and meaning of each value:
 
 meet (The default value)
