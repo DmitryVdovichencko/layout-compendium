@@ -240,29 +240,34 @@ preserveAspectRatio = "none"
 preserveAspectRatio = "xMinYMin slice"
 ```
 
-Все эти значения сначала выглядят незнакомыми.
-These values may seem foreign at first. To make understanding them easier and make them more familiar, you can think of the meetOrSlice value as being similar to the background-size values contain and cover; they work pretty much the same. meet is similar to contain, and slice is similar to cover. Here are the definitions and meaning of each value:
+Все эти значения сначала выглядят незнакомыми. Чтобы было проще понять их и познакомиться с ним поближе, вы можете представлять `meetOrSlice` как похожие значения свойства `background-size` : `contain` и `cover`; они работают почти одинаково. `meet` похож на `contain`, а `slice` похож на `cover`. Вот определение и сущность этих значений:
 
-meet (The default value)
-    Scale the graphic as much as possible while maintaining the following two criteria:
 
-        aspect ratio is preserved
-        the entire viewBox is visible within the viewport
+#### `meet` (Значение по умолчанию)
+  
+ Масштабирует графику насколько это возможно, соблюдая два критерия:
 
-    In this case, if the aspect ratio of the graphic does not match the viewport, some of the viewport will extend beyond the bounds of the viewBox (i.e., the area into which the viewBox will draw will be smaller than the viewport). (See the last example of The viewBox section.) In this case, the boundaries of the `viewBox` are contained inside the viewport such that the boundaries *meet*.
+* __Соотношение сторон в приоритете__
+* __Весь `viewBox` должен быть виден внутри `viewport`__
 
-    This value is similar to background-size: contain. The background image is scaled as much as possible while preserving its aspect ratio and making sure it fits entirely into the background painting area. If the aspect ratio of the background is not the same as that of the element it is being applied to, parts of the background painting area will not be covered by the background image.
-slice
-    Scale the graphic so that the viewBox covers the entire viewport area, while maintaining its aspect ratio. The viewBox is scaled just enough to cover the viewport area (in both dimensions), but it is not scaled any more than needed to achieve that. In other words, it is scaled to the smallest size such that the width and height of the viewBox can completely cover the viewport.
+В этом случае, если соотношение сторон графики не совпадает с соотношением сторон `viewport`, некоторая часть `viewport` будет расширена за границы `viewBox` ( т.е. область `viewBox` будет отрисована меньше чем `viewport` - как в последнем примере в главе про `viewBox`). В этом случае  границы `viewBox` будут находится внутри `viewport`, так что из рамки как бы __"встретятся" (с англ. "meet")__.
 
-    In this case, if the aspect ratio of the viewBox does not match the viewport, some of the viewBox will extend beyond the bounds of the viewport (i.e., the area into which the viewBox will draw is larger than the viewport). This will result in part of the `viewBox` being *sliced off*.
+> Это значение похоже на `background-size: contain`. Когда фоновое изображение масштабирутся насколько это возможно, при этом поддерживая соотношение сторон и убедившись в том, что оно полностью поместится в предназначенную для него область. Если соотношение сторон фонового изображения не совпадает с сооотношением сторон элемента, к которому его применили, часть области этого элемента не будет  закрыта фоновым изображением.
 
-    You can think of this as being similar to background-size: cover. In the case of a background image, the image is scaled while preserving its intrinsic aspect ratio (if any), to the smallest size such that both its width and its height can completely cover the background positioning area.
+#### `slice`
 
-So, meetOrSlice is used to specify whether or not the viewBox will be completely contained inside the viewport, or if it should be scaled as much as needed to cover the entire viewport, even if this means that a part of the viewbox will be “sliced off”.
+Масштабирует графику до тех пор пока `viewBox` не покроет всю область `viewport`, при этом сохраняя соотношение сторон. `viewBox` масштабируется для того чтобы закрыть `viewport` (по обоим осям), но не больше чем необходимо для этого. Другими словами, масштабируется до наименьшего размера, достаточного чтобы закрыть `viewport` по ширине и высоте.
 
-For example, if we were to apply viewBox size of 200x300, and using both the meet and slice values, keeping the align value set to the default by the browser, the result for each value will look like the following:
-The result of applying the meet parameter vs the slice parameter on a viewBox with an aspect ratio different from that of the viewport's aspect ratio.
+В этом случае, если соотношение сторон `viewBox` не совпадает с соотношением сторон `viewport`, часть `viewBox`будет расширена за пределы `viewport` (т.е. область в которой будет отрисован `viewBox` станет больше чем `viewport`). Это приведет к тому, что часть `viewBox` будет __"отсечена" ( с англ. "sliced off")__.
+
+> Можете представлять такое поведение как при использовании `background-size: cover`. В этом случае фоновое изображение будет масштабироваться с соблюдением пропорций до наименьшего размера, способного полностью закрыть область применения фона, как по ширине так и по высоте.
+
+Так что `meetOrSlice` используются для того, чтобы определить будет ли `viewBox` полностью помещаться внутри `viewport`, или он должен быть масштабирован настолько, насколько необходимо, чтобы заполнить `viewport`, даже если часть `viewBox` будет отсечена.
+
+Например, если мы применяем `viewBox` размерами 200x300, и попробуем оба значения свойства `meet` и `slice`, сохраняя браузерное значение по умолчанию для выравния графики, результат будет выглядеть так:
+
+![result meet and slice](https://d33wubrfki0l68.cloudfront.net/1c0be52ee4e8411e75db7b0f967ccfa6cdb762ca/6e9ca/images/viewbox-200-300-meet-vs-slice.jpg)
+
 
 The default value for align is xMidYMid, so, in both cases, the graphic is scaled so that its mid axes align with the mid axes of the viewport.
 
