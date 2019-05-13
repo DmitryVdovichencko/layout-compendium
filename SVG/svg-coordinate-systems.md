@@ -268,16 +268,17 @@ preserveAspectRatio = "xMinYMin slice"
 
 ![result meet and slice](https://d33wubrfki0l68.cloudfront.net/1c0be52ee4e8411e75db7b0f967ccfa6cdb762ca/6e9ca/images/viewbox-200-300-meet-vs-slice.jpg)
 
+Стандартное значение для выравнивания - `xMidYMid`, значит, в обоих случаях, графика будет масштабироваться так что ее центральные оси выровняются с центральными осями `viewport`.
 
-The default value for align is xMidYMid, so, in both cases, the graphic is scaled so that its mid axes align with the mid axes of the viewport.
+Параметр `align` принимает одно из 9 значений или значение `none`. Любое значение отличающееся от `none` используется для универсального масштабирования графики с сохранением соотношения сторон, и также используется для выравнивания `viewBox` внутри `viewport`.
 
-The align parameter takes one of nine values, or the none value. Any value other than none is used to uniformly scale the image preserving its aspect ratio, and it is also used to align the viewBox inside the viewport.
+Значения параметра align работают схоже со значениями свойства `background-position`, когда его используют с процентными значениями. Вы можете думать о `viewBox` как о `background-image`. Способ позиционирования с `align` отличается от `background-position` тем, что вместо позиционирования определенных точек `viewBox` относительно соответствующих точек `viewport`, мы выравниваем оси  `viewBox` относительно соответствующих осей `viewport`.
 
-The align values works similar to the way background-position works when used with percentage values. You can think of the viewBox as being the background image. The way the positioning with align differs from background-position is that instead of positioning a specific point of the viewbox over a corresponding point of the viewport, it aligns specific “axes” of the viewBox with corresponding “axes” of the viewport.
+Чтобы по порядку разобраться с каждым из значений `align`, нам сначало нужно познакомиться с каждой осью.
 
-In order to understand the meaning of each of the align values, we’re going to first introduce each of the “axes”.
+Помните значения `<min-x>` и `<min-y>` для `viewBox`? Мы собираемся использовать их для определения осей `viewBox` - `<min-x>` и `<min-y>`. Дополнительно мы определим две оси `max-x` и `max-y`, которые будут расположены на `<min-x> + width` и `<min-y> + height` соответственно. И последнее, но не менее важное: мы определим две оси `<mid-x>` и `<mid-y>`, которые будут расположены 
+на `<min-x> + (width/2)` и `<min-y> + (height/2)` соответственно.
 
-Remember the <min-x> and <min-y> values of the viewBox? We’re going to use each of these to define the “min-x” axis and “min-y” axis on the viewBox. Additionally, we’re going to define two axes “max-x” and “max-y”, which will be positioned at <min-x> + <width> and <min-y> + <height>, respectively. And last but not least, we’ll define two axes “mid-x” and “mid-y”, which are positioned at <min-x> + (<width>/2) and <min-y> + (<height>/2), respectively.
 
 Did that make things more confusing? If so, have a look at the following image to see what each of those axes represents. In the image, both <min-x> and <min-y> are set to their default 0 values. The viewBox is set to viewBox = "0 0 300 300".
 The pink and orange solid lines represent the min-y and min-x values respectively. The dashed pink and orange lines represent the mid and max x and y values.
