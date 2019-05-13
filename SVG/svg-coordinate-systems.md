@@ -276,68 +276,96 @@ preserveAspectRatio = "xMinYMin slice"
 
 Чтобы по порядку разобраться с каждым из значений `align`, нам сначало нужно познакомиться с каждой осью.
 
-Помните значения `<min-x>` и `<min-y>` для `viewBox`? Мы собираемся использовать их для определения осей `viewBox` - `<min-x>` и `<min-y>`. Дополнительно мы определим две оси `max-x` и `max-y`, которые будут расположены на `<min-x> + width` и `<min-y> + height` соответственно. И последнее, но не менее важное: мы определим две оси `<mid-x>` и `<mid-y>`, которые будут расположены 
-на `<min-x> + (width/2)` и `<min-y> + (height/2)` соответственно.
+Помните значения `<min-x>` и `<min-y>` для `viewBox`? Мы собираемся использовать их для определения осей `viewBox` - `<min-x>` и `<min-y>`. Дополнительно мы определим две оси `max-x` и `max-y`, которые будут расположены на `<min-x> + width` и `<min-y> + height` соответственно. И последнее, но не менее важное: мы определим две оси `<mid-x>` и `<mid-y>`, которые будут расположены на `<min-x> + (width/2)` и `<min-y> + (height/2)` соответственно.
+
+Еще не запутались? Если да то вот вам картинка где предсталены все эти оси. Здесь оба начальных значения `<min-x>` и `<min-y>` выбраны по умолчанию - 0. `viewBox` выбран `viewBox = "0 0 300 300"`. Розовые и оранжевые линии представляют собой значения `<min-x>` и `<min-y>` сответственно. Пунктирные розовые и оранжевые линии используются для средних и максимальных значений.
+
+![viewBox axes](https://d33wubrfki0l68.cloudfront.net/1788c7fec01fa6aa391a418e3ce29ff19de533a0/11b57/images/viewbox-x-y-axes.jpg)
+
+Серые пунктирные линии показывают средние оси `viewport`. 
 
 
-Did that make things more confusing? If so, have a look at the following image to see what each of those axes represents. In the image, both <min-x> and <min-y> are set to their default 0 values. The viewBox is set to viewBox = "0 0 300 300".
-The pink and orange solid lines represent the min-y and min-x values respectively. The dashed pink and orange lines represent the mid and max x and y values.
+Значения для выравнивания следующие:
 
-The dashed grey lines in the above image represent the mid-x and mid-y axes of the viewport. We’re going to use those to align the mid-x and mid-y of axes of the viewBox for some values. For the viewport, the min-x value is equal to 0, the min-y value is also 0, the max-x value is equal to the width of the viewBox, the max-y value is equal to its height, and the mid-x and mid-y represent the middle values of the width and height, respectively.
+#### `none`
+   
+* Не используем универсальное масштабирование
+* Масштабируем графику без сохранения соотношения сторон, только при необходимости, например если оболочка графического элемента достигла границ `viewport`.
 
-The alignment values are:
+> Другими  словами `viewBox` растягивается или сжимается по необходимости заполнения `viewport` независимо от соотношения сторон. Графика может быть искажена.Значение `<meetOrSlice>`  будет проигнорировано.
 
-none
-    Do not force uniform scaling. Scale the graphic content of the given element non-uniformly (without preserving aspect ratio) if necessary such that the element's bounding box exactly matches the viewport rectangle.
+#### `xMinYMin`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x>` `viewBox` по наименьшему значению `X` `viewport`
+* Выравниваем `<min-y>` `viewBox` по наименьшему значению `Y` `viewport`
 
-    In other words, the viewBox is stretched or shrunk as necssary so that it fills the entire viewport exactly, disregarding the aspect ratio. The graphic may be distorted.
+> Можете представлять это значение схожим с `background-position: 0% 0%;`
 
-    (Note: if <align> is none, then the optional <meetOrSlice> value is ignored.)
-xMinYMin
-    Force uniform scaling.
-    Align the <min-x> of the element's viewBox with the smallest X value of the viewport.
-    Align the <min-y> of the element's viewBox with the smallest Y value of the viewport.
-    Think of this as being similar to background-position: 0% 0%;.
-xMinYMid
-    Force uniform scaling.
-    Align the <min-x> of the element's viewBox with the smallest X value of the viewport.
-    Align the midpoint Y value of the element's viewBox with the midpoint Y value of the viewport.
-    Think of this as being similar to background-position: 0% 50%;.
-xMinYMax
-    Force uniform scaling.
-    Align the <min-x> of the element's viewBox with the smallest X value of the viewport.
-    Align the <min-y>+<height> of the element's viewBox with the maximum Y value of the viewport.
-    Think of this as being similar to background-position: 0% 100%;.
-xMidYMin
-    Force uniform scaling.
-    Align the midpoint X value of the element's viewBox with the midpoint X value of the viewport.
-    Align the <min-y> of the element's viewBox with the smallest Y value of the viewport.
-    Think of this as being similar to background-position: 50% 0%;.
-xMidYMid (The default value)
-    Force uniform scaling.
-    Align the midpoint X value of the element's viewBox with the midpoint X value of the viewport.
-    Align the midpoint Y value of the element's viewBox with the midpoint Y value of the viewport.
-    Think of this as being similar to background-position: 50% 50%;.
-xMidYMax
-    Force uniform scaling.
-    Align the midpoint X value of the element's viewBox with the midpoint X value of the viewport.
-    Align the <min-y>+<height> of the element's viewBox with the maximum Y value of the viewport.
-    Think of this as being similar to background-position: 50% 100%;.
-xMaxYMin
-    Force uniform scaling.
-    Align the <min-x>+<width> of the element's viewBox with the maximum X value of the viewport.
-    Align the <min-y> of the element's viewBox with the smallest Y value of the viewport.
-    Think of this as being similar to background-position: 100% 0%;.
-xMaxYMid
-    Force uniform scaling.
-    Align the <min-x>+<width> of the element's viewBox with the maximum X value of the viewport.
-    Align the midpoint Y value of the element's viewBox with the midpoint Y value of the viewport.
-    Think of this as being similar to background-position: 100% 50%;.
-xMaxYMax
-    Force uniform scaling.
-    Align the <min-x>+<width> of the element's viewBox with the maximum X value of the viewport.
-    Align the <min-y>+<height> of the element's viewBox with the maximum Y value of the viewport.
-    Think of this as being similar to background-position: 100% 100%;.
+#### `xMinYMid`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x>` `viewBox` по наименьшему значению `X` `viewport`
+* Выравниваем `<mid-y>` `viewBox` по среднему значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 0% 50%;`
+
+#### `xMinYMax`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x>` `viewBox` по наименьшему значению `X` `viewport`
+* Выравниваем `<min-y> + <height>` `viewBox` по максимальному значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 0% 100%;`
+
+#### `xMidYMin`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<mid-x>` `viewBox` по среднему значению `X` `viewport`
+* Выравниваем `<min-y>` `viewBox` по наименьшему значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 50% 0%;`
+
+#### `xMidYMid` (значение по умолчанию)
+   
+* Используем универсальное масштабирование
+* Выравниваем `<mid-x>` `viewBox` по среднему значению `X` `viewport`
+* Выравниваем `<mid-y>` `viewBox` по среднему значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 50% 50%;`
+
+#### `xMidYMax`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<mid-x>` `viewBox` по среднему значению `X` `viewport`
+* Выравниваем `<min-y> + <height>` `viewBox` по максимальному значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 50% 100%;`
+
+#### `xMaxYMin`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x> + <width>` `viewBox` по максимальному значению `X` `viewport`
+* Выравниваем `<min-y>` `viewBox` по наименьшему значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 100% 0%;`
+
+#### `xMaxYMid`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x> + <width>` `viewBox` по максимальному значению `X` `viewport`
+* Выравниваем `<mid-y>` `viewBox` по среднему значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 100% 50%;`
+
+#### `xMaxYMax`
+   
+* Используем универсальное масштабирование
+* Выравниваем `<min-x> + <width>` `viewBox` по максимальному значению `X` `viewport`
+* Выравниваем `<min-y> + <height>` `viewBox` по максимальному значению `Y` `viewport`
+
+> Можете представлять это значение схожим с `background-position: 100% 100%;`
+
 
 So, using the align and meetOrSlice values of the preserveAspectRatio attribute, you can specify whether or not to scale the viewBox uniformly, how to align it inside the viewport, and whether or not it should be entirely visible inside the viewport.
 
