@@ -367,17 +367,16 @@ preserveAspectRatio = "xMinYMin slice"
 > Можете представлять это значение схожим с `background-position: 100% 100%;`
 
 
-So, using the align and meetOrSlice values of the preserveAspectRatio attribute, you can specify whether or not to scale the viewBox uniformly, how to align it inside the viewport, and whether or not it should be entirely visible inside the viewport.
+Таким образом, используя значения `align` и `meetOrSlice` аттрибута `preserveAspectRatio` вы может определить будет ли универсально смаштабирован `viewBox`, как он будет выравниваться внутри `viewport`, и будет ли он полностью отображаться внутри viewport. 
 
-Sometimes, and depending on the size of the viewBox, some values may have similar results. For example, in the viewBox="0 0 200 300" example from earlier, some alignments are identical using different align values. The value of meetOrSlice is set to meet in this case so that the entire viewBox is contained inside the viewport.
-The result of aligning the viewBox using different align values. The meetOrSlice value is set to meet.
+Иногда, в зависимости от размеров `viewBox`, некоторые значения могут иметь схожий результат. Например, `viewBox="0 0 200 300"` в примере, приведенном ранее, некоторые значения для выравния идентичны друг другу. Значение `meetOrSlice` установлено в `meet` и в этом случае весь `viewBox` будет виден внутри `viewport`.
 
-If we were to change the meetOrSlice value to slice, we’d get different results for different values. Notice how the viewBox is stretched so that it covers the entire viewport. The x-axis is stretched so that the 200 units cover the viewport’s 800 units. In order for this to happen, and to maintain the aspect ratio of the viewbox, the y-axis gets “sliced off” at the bottom, but you can image it extending below the viewport’s height.
-The result of aligning the viewBox using different align values. The meetOrSlice value is set to slice.
+![result of aligning the viewBox using different align values](https://d33wubrfki0l68.cloudfront.net/31425aa11ff02ccee1bc27551c787857002c450e/29dcc/images/viewbox-meet-align-same.jpg)
 
-Of course, different viewBox values will also look different from the 200x300 we’re using here. For the sake of brevity, I won’t get into more examples, and I’ll leave you to play with an interactive demo I created to help you better visualize how the viewBox and different preserveAspectRatio values work together when different values are used. You can check the interactive demo out by visiting the link in the next section.
+Если мы изменим значение `meetOrSlice` на `slice`, мы получим разные результаты для разных значений. Заметьте, как `viewBox` будет растянут чтобы заполнить весь `viewport`. Ось `x` расятнется так что 200 единиц закроют 800 единиц `viewport`. Чтобы это произошло, и при этом сохранилось соотношение сторон `viewBox`, ось `y` получится "обрезаной" снизу, но вы можете представить ее выходящей за высоту `viewport`.
 
-But before we move to that, I just want to note that the mid-x, mid-y, max-x, and max-y values change if the values of the <min-x> and <min-y> change. You can play with the interactive demo and change these values to see how the axes and thus the alignment of the viewBox changes accordingly.
+![aligning the viewBox using different align values. The meetOrSlice value is set to slice](https://d33wubrfki0l68.cloudfront.net/26cceca4d0a614f092a490a44f75a54e691caf56/b7b09/images/viewbox-slice-align-same.jpg)
 
-The following image shows the effect of using viewBox = "100 0 200 300" on the position of the alignment axes. We’re using the same example as earlier, but instead of having the <min-x> value be set to zero, we’re setting it to 100. You can set them to any number value you want. Notice how the min-x, mid-x, and max-x axes change. The preserveAspectRatio used here is the default xMidYMid meet, which means that the mid-* axes are aligned with the middle axes of the viewport.
-The effect of changing the value of <min-x> on the position of the x-axes. The translucent blue area shows the area which is considered to be the viewBox area after changing the value of <min-x>.
+Конечно, разные значения `viewBox` будут выглядеть по другому, в отличие от того,что мы использовали здесь - 200х300. Для краткости, примеров больше не будет, вместо этого можно поиграть с [интерактивным демо](https://www.sarasoueidan.com/demos/interactive-svg-coordinate-system/)
+
+
