@@ -22,9 +22,9 @@ SVG можно добавить на страницу по-разному:
 
 ![nautical logo](https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2014/08/logo.png)
 
-logo
+### Добавляем SVG с тэгом `<img>`
 
-SVG embedded using <img>
+Когда SVG добавлятся с использованием тэга 
 When an SVG is embedded as an image in an <img> tag, the height and width specified on the <img> tag are used by the browser as a viewport to render the SVG into. The contents of the SVG are then positioned inside the viewport depending on the value of the viewBox specified on the <svg>.
 
 <img src="my_SVG_file.svg" alt="Image description." />
