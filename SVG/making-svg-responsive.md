@@ -10,16 +10,17 @@ SVG можно добавить на страницу по-разному:
 * Используем iframe
 * Используем фоновое изображение CSS.
 
-Теоретически, создание масштабируемого, относительно его контейнера, SVG, должно быть простым процессом, типа удаляем любой фиксированный габарит (высоту и/или ширину), а затем определяем значение аттрибута viewBox. Тем не менее, из-за 
+Теоретически, создание масштабируемого, относительно его контейнера, SVG, должно быть простым процессом, типа удаляем любой фиксированный габарит (высоту и/или ширину), а затем определяем значение аттрибута viewBox. Тем не менее, из-за различий в браузерных реализациях и разных несоответствий, веб не является страной радуги и единорогов, поэтому создание отзывчивого SVG не является таким очевидным, ведь браузеры определяют габариты SVG при встраивании разными способами и они имеют разногласия между собой.
 
-Conceptually, making an SVG scale as its container scales should be as simple as removing any fixed height and/or width, and specifying a viewBox attribute value. However, due to different browser implementations and inconsistencies, the web isn’t all ponies and rainbows, and making SVGs fluid isn’t quite that straightforward, because the way browsers determine the dimensions of an SVG when embedded in different ways isn’t consistent across all of them.
+Так что есть опредленные фиксы и хаки, которые могут помочь в достижении предсказуемого поведения во всех браузерах. В этой статье будут рассмотрены техники создания адаптивного или резинового SVG, и случаи когда лучше использовать те или иные приемы.
 
-That said, there are certain “fixes” and hacks that we can use to get the expected behavior in all browsers. In this article, we’re going to explore these techniques, going over when to use each one, in order to make SVGs fluid and/or adaptive.
+## Готовим резиновый SVG используя CSS.
 
-Making SVGs Fluid Using CSS
-In order to make an SVG fluid, the first logical thing to do is to remove the height and width attributes. When a fixed height and/or width is specified, the SVG is going to maintain that height/or width, thus restricting it from being fully responsive. You should, however, leave the viewBox attribute present. After removing the height and width, you can embed the SVG in one of several ways on the page.
+Чтобы создать резиновый SVG первый логичный шаг, который стоит сделать - удалить аттрибуты `width` и `height`. Когда определены фиксированные значения `width` и/или `height` SVG будет стараться их поддерживать, что будет ограничивать его от того чтобы стать полностью "резиновым". Тем не менее, аттрибут `viewBox` лучше оставить. После удаления `width` и `height`можно добавить SVG на страницу одним из перечисленных способов.
 
-We’ll be using the following SVG nautical logo in the demos. It’s from a freebie designed by Freepik.
+Для демонстрации используем морской SVG логотип. За халявный лого спасибо Freepik.
+
+![nautical logo](https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2014/08/logo.png)
 
 logo
 
