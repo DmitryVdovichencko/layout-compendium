@@ -8,7 +8,7 @@ SVG можно добавить на страницу по-разному:
 * Используем тэг <img> 
 * Используем тэг <object>
 * Используем iframe
-* Используем фоновое изображение CSS.
+* Используем фоновое изображение CSS
 
 Теоретически, создание масштабируемого, относительно его контейнера, SVG, должно быть простым процессом, типа удаляем любой фиксированный габарит (высоту и/или ширину), а затем определяем значение аттрибута viewBox. Тем не менее, из-за различий в браузерных реализациях и разных несоответствий, веб не является страной радуги и единорогов, поэтому создание отзывчивого SVG не является таким очевидным, ведь браузеры определяют габариты SVG при встраивании разными способами и они имеют разногласия между собой.
 
@@ -24,10 +24,13 @@ SVG можно добавить на страницу по-разному:
 
 ### Добавляем SVG с тэгом `<img>`
 
-Когда SVG добавлятся с использованием тэга 
-When an SVG is embedded as an image in an <img> tag, the height and width specified on the <img> tag are used by the browser as a viewport to render the SVG into. The contents of the SVG are then positioned inside the viewport depending on the value of the viewBox specified on the <svg>.
+Когда SVG добавлятся с использованием тэга `<img>`, высота и ширина определенные для `<img>` используются браузером как `viewport` для отрисовки SVG. Содержимое SVG позиционируется внутри `viewport` основываясь на значении аттрибута `viewBox`, определенного для SVG.
 
+```html
 <img src="my_SVG_file.svg" alt="Image description." />
+```
+
+Обычно, браузеры достаточно умны, чтобы определить высоту и ширину SVG, даже если вы не определили их для `<img>`.
 Normally, browsers are smart enough to determine the width and height of the SVG even if you don’t specify a width and height for the <img> element. For example, if you were to wrap the img in a div, without specifying the height and width of the img, Chrome and Firefox will both assume the img has width: 100%; the SVG is then stretched to fill the containing div, and its height is adjusted accordingly so that it preserves its aspect ratio. As the containing div is then resized, the img SVG responds in an expected way. This behavior is different from an img referencing a raster graphic such as a PNG image, for example; in the latter case, you’d have to explicitly set the width of the img to 100% using CSS to make it fluid.
 
 In Internet Explorer, things are different. If you don’t specify a width for the img, it will assume the height is equal to 150px, which is the default height for replaced elements as specified in CSS—the default width is 300px. The SVG is then positioned inside the containing div such that its height is equal to 150px; the width is assumed to be 100%, though, making the SVG always 150px in height no matter how wide the container gets, resulting in extra white spaces on both sides. In order to work around this issue in IE, it is enough to explicitly set the width on the img to 100%. These results were obtained from tests made in Internet Explorer 9 and 11.
